@@ -6,10 +6,10 @@ const rl = readline.createInterface({
 });
 
 function xor(a, b) {
-    var length = Math.max(a.length, b.length);
-    var buffer = Buffer.allocUnsafe(length);
+    const length = Math.max(a.length, b.length);
+    const buffer = Buffer.allocUnsafe(length);
 
-    for (var i = 0; i < length; ++i) {
+    for (let i = 0; i < length; i += 1) {
         buffer[i] = a[i] ^ b[i];
     }
 
