@@ -1,17 +1,24 @@
 const readline = require("readline");
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+const { isHexString } = require("../../utils");
 
 function hexToBase64(hexString) {
-    const buf = Buffer.from(hexString, "hex");
-    return buf.toString("base64");
+    const buffer = Buffer.from(hexString, "hex");
+    return buffer.toString("base64");
 }
 
-rl.question("What's your hex string?\n", hexString => {
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+rl.question("What's your hex string?\n", (hexString) => {
+    if (!isHexString(hexString)) {
+        console.error("Please enter a hex encoded string");
+        process.exit(1);
+    }
+
     console.log("It equals to the base64 string:");
     console.log(hexToBase64(hexString));
+
     rl.close();
 });
