@@ -1,6 +1,7 @@
 const readline = require("readline");
 
-const { isHexString, xor } = require("../../utils");
+const { isHexString } = require("../../utils/encoding");
+const { xor } = require("../../utils/buffers");
 
 function hexXor(hexString1, hexString2) {
     const buffer1 = Buffer.from(hexString1, "hex");

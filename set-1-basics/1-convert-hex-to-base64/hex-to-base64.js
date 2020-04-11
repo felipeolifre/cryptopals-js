@@ -1,6 +1,6 @@
 const readline = require("readline");
 
-const { isHexString } = require("../../utils");
+const { isHexString } = require("../../utils/encoding");
 
 function hexToBase64(hexString) {
     const buffer = Buffer.from(hexString, "hex");
