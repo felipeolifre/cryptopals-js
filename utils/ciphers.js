@@ -1,10 +1,16 @@
 const { xor } = require("./buffers");
 
-function xorCipher(input, key) {
-    const inputBuffer = Buffer.from(input, "hex");
+/**
+ * XOR encrypt/decrypt a buffer using the given key.
+ *
+ * @param {Buffer} inputBuffer - The bytes to encrypt or decrypt.
+ * @param {string} key - The key.
+ *
+ * @returns {Buffer} The encrypted/decrypted buffer.
+ */
+function xorCipher(inputBuffer, key) {
     const keyBuffer = Buffer.allocUnsafe(inputBuffer.length).fill(key);
-    const outputBuffer = xor(inputBuffer, keyBuffer);
-    return outputBuffer.toString("utf8");
+    return xor(inputBuffer, keyBuffer);
 }
 
 module.exports = {

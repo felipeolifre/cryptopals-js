@@ -143,7 +143,7 @@ function isValidCandidatePlaintext(candidatePlaintext) {
 }
 
 /**
- * Breaks a single-byte XOR cipher.
+ * Breaks a single-byte XOR cipher using frequency analysis.
  *
  * @param {string} ciphertext - The ciphertext to decrypt, in hex encoding.
  *
@@ -151,9 +151,16 @@ function isValidCandidatePlaintext(candidatePlaintext) {
  * returned if a candidate key isn't found and hence the message is not decrypted.
  */
 function breakXORCipher(ciphertext) {
+    const ciphertextBuffer = Buffer.from(ciphertext, "hex");
     return candidateKeys.reduce(
         (previousFind, candidateKey) => {
-            const candidatePlaintext = xorCipher(ciphertext, candidateKey);
+            const candidatePlaintextBuffer = xorCipher(
+                ciphertextBuffer,
+                candidateKey
+            );
+            const candidatePlaintext = candidatePlaintextBuffer.toString(
+                "utf8"
+            );
             if (!isValidCandidatePlaintext(candidatePlaintext)) {
                 return previousFind;
             }
